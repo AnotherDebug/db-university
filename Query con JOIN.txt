@@ -118,14 +118,14 @@ per ogni esame, stampando anche il voto massimo. Successivamente,
 filtrare i tentativi con voto minimo 18;
 ***********
 
-SELECT `students`.`name` AS `nome`, `students`.`surname` AS `cognome`, COUNT(`exam_student`.`exam_id`) AS `numero_tentativi`, MAX(`exam_student`.`vote`) AS `voto_massimo`
+SELECT `students`.`name` AS `nome`, `students`.`surname` AS `cognome`, COUNT(`exam_student`.`student_id`) AS `numero_tentativi`, MAX(`exam_student`.`vote`) AS `voto_massimo`
 FROM `students`
 INNER JOIN `exam_student`
 ON `students`.`id` = `exam_student`.`student_id`
 INNER JOIN `exams`
 ON `exams`.`id` = `exam_student`.`exam_id`
-GROUP BY `exam_student`.`student_id`, `exam_student`.`exam_id`
-WHERE MAX(`exam_student`.`vote`) >= 18;
+GROUP BY `students`.`id`
+HAVING MAX(`exam_student`.`vote`) >= 18;
 
 
 
